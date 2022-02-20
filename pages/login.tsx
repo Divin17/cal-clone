@@ -96,7 +96,7 @@ const Login: React.FC = () => {
                            <Button
                               isDisabled={isDisabled}
                               isLoading={isLoading}
-                              buttonText="Login"
+                              buttonText="Sign in"
                            />
                         </form>
                      )}

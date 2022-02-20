@@ -16,7 +16,7 @@ model User {
   email     String?   @unique
   createdAt DateTime  @default(now()) @map(name: "created_at")
   updatedAt DateTime  @updatedAt @map(name: "updated_at")
-  guests    Guest[]
+  attendees    Attendee[]
   meetings  Meeting[]
 
   @@map(name: "users")
@@ -30,19 +30,19 @@ model Meeting {
   additional_note String?
   createdAt       DateTime @default(now()) @map(name: "created_at")
   updatedAt       DateTime @updatedAt @map(name: "updated_at")
-  guest           Guest[]
+  attendee           Attendee[]
 
   @@map(name: "meetings")
 }
 
-model Guest {
+model Attendee {
   id        Int      @id @default(autoincrement())
-  guest     User?    @relation(fields: [guestId], references: [id])
-  guestId   Int?
+  attendee     User?    @relation(fields: [attendeeId], references: [id])
+  attendeeId   Int?
   meeting   Meeting? @relation(fields: [meetingId], references: [id])
   meetingId Int?
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
 
-  @@map(name: "guests")
+  @@map(name: "attendees")
 }

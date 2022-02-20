@@ -25,7 +25,7 @@ const TextInput: React.FC<Props> = (props) => {
                <select
                   className={`appearance-none border ${
                      props.errorMessage && props.touched && "border-red-500"
-                  } w-full rounded py-3 px-3 mb-2 text-gray-700  bg-white border pr-8 leading-tight focus:border-black`}
+                  } w-full py-3 px-3 mb-2 text-gray-700  bg-white border pr-8 leading-tight focus:border-black`}
                   name={props.name}
                   onChange={props.onChange}
                   onBlur={props.onBlur}
@@ -57,7 +57,7 @@ const TextInput: React.FC<Props> = (props) => {
             <input
                className={`appearance-none border ${
                   props.errorMessage && props.touched && "border-red-500"
-               } w-full rounded py-2 px-3 mb-2 text-gray-700`}
+               } w-full py-2 px-3 mb-2 text-gray-700`}
                name={props.name}
                type={props.type}
                onChange={props.onChange}

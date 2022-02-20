@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  name      String?
+  email     String?   @unique
+  createdAt DateTime  @default(now()) @map(name: "created_at")
+  updatedAt DateTime  @updatedAt @map(name: "updated_at")
+  guests    Guest[]
+  meetings  Meeting[]
+
+  meetingId Int
+  @@map(name: "users")
+}
+
+model Meeting {
+  id              Int      @id @default(autoincrement())
+  organizer       User?    @relation(fields: [organizerId], references: [id])
+  organizerId     Int?
+  date            DateTime
+  additional_note String?
+  createdAt       DateTime @default(now()) @map(name: "created_at")
+  updatedAt       DateTime @updatedAt @map(name: "updated_at")
+  guest           Guest[]
+
+  @@map(name: "meetings")
+}
+
+model Guest {
+  id        Int      @id @default(autoincrement())
+  guest     User?    @relation(fields: [guestId], references: [id])
+  guestId   Int?
+  meeting   Meeting? @relation(fields: [meetingId], references: [id])
+  meetingId Int?
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+  @@map(name: "guests")
+}

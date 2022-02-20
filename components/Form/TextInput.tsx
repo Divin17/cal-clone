@@ -52,6 +52,23 @@ const TextInput: React.FC<Props> = (props) => {
          );
          break;
 
+      case "textarea":
+         inputElement = (
+            <textarea
+               className={`appearance-none border ${
+                  props.errorMessage && props.touched && "border-red-500"
+               } w-full py-2 px-3 mb-2 text-gray-700`}
+               name={props.name}
+               onChange={props.onChange}
+               onBlur={props.onBlur}
+               maxLength={props.max}
+               id={props.id}
+               placeholder={props.placeholder ?? ""}
+            >
+               {props.preValue}
+            </textarea>
+         );
+         break;
       default:
          inputElement = (
             <input

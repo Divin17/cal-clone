@@ -32,7 +32,7 @@ const TextInput: React.FC<Props> = (props) => {
                >
                   <option>Select {props.label}</option>
                   {Boolean(props.options)
-                     ? props.options.map((option) => (
+                     ? props.options.map((option: any) => (
                           <option key={option.id} value={option.id}>
                              {option.name}
                           </option>

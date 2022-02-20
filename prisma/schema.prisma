@@ -19,7 +19,6 @@ model User {
   guests    Guest[]
   meetings  Meeting[]
 
-  meetingId Int
   @@map(name: "users")
 }
 

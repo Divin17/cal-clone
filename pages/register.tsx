@@ -54,10 +54,10 @@ const Register: React.FC = () => {
 
    return (
       <>
-         <div className="h-screen max-w-7xl m-auto flex flex-row">
+         <div className="flex flex-row h-screen m-auto max-w-7xl">
             <div className="w-1/2 m-auto">
-               <h1 className="text-3xl font-bold text-primary mb-6">Cal.com</h1>
-               <h1 className="text-6xl font-bold text-primary mb-6">
+               <h1 className="mb-6 text-3xl font-bold text-primary">Cal.com</h1>
+               <h1 className="mb-6 text-6xl font-bold text-primary">
                   You are one step away from simple scheduling
                </h1>
                <p className="text-gray-500">
@@ -87,11 +87,11 @@ const Register: React.FC = () => {
                   </div>
                </div>
             </div>
-            <div className=" w-1/2 max-w-lg m-auto bg-white  border border-primaryBorder shadow-default py-10 px-16">
-               <h1 className="text-2xl font-bold text-primary mt-1">
+            <div className="w-1/2 max-w-lg px-16 py-10 m-auto bg-white border border-primaryBorder shadow-default">
+               <h1 className="mt-1 text-2xl font-bold text-primary">
                   Start 14 days free trial
                </h1>
-               <p className="text-gray-400 text-sm mb-3">
+               <p className="mb-3 text-sm text-gray-400">
                   <b>No credit card required.</b> Try all pro features for 14
                   days.
                   <br />
@@ -152,6 +152,7 @@ const Register: React.FC = () => {
                            touched={touched.password}
                         />
                         <Button
+                           customClass="text-white bg-black"
                            isDisabled={isDisabled}
                            isLoading={isLoading}
                            buttonText="Sign up for free"
@@ -159,7 +160,7 @@ const Register: React.FC = () => {
                      </form>
                   )}
                </Formik>
-               <p className="text-center text-sm mt-5 ">
+               <p className="mt-5 text-sm text-center ">
                   Already have an account?
                   <Link href="/login">
                      <a className="underline hover:text-black">Login</a>

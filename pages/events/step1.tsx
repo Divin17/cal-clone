@@ -53,8 +53,8 @@ const Step1: React.FC = () => {
 
    return (
       <>
-         <div className="h-full max-w-4xl m-auto mt-20 flex flex-row bg-white border shadow-default">
-            <div className="w-1/2 border-r m-auto py-10 px-16">
+         <div className="flex flex-row h-full max-w-4xl m-auto mt-20 bg-white border shadow-default">
+            <div className="w-1/2 px-16 py-10 m-auto border-r">
                <div className="w-1/6">
                   <Image
                      src="/images/user.png"
@@ -64,7 +64,7 @@ const Step1: React.FC = () => {
                   />
                </div>
                <p className="text-gray-500">Daniel Tonel</p>
-               <h1 className="text-3xl font-bold text-primary mb-6">
+               <h1 className="mb-6 text-3xl font-bold text-primary">
                   15 Mins Meeting
                </h1>
                <div className="flex flex-row mt-6">
@@ -74,7 +74,7 @@ const Step1: React.FC = () => {
                   </div>
                </div>
             </div>
-            <div className=" w-1/2 max-w-lg bg-white py-10 px-16">
+            <div className="w-1/2 max-w-lg px-16 py-10 bg-white ">
                <Formik
                   initialValues={initialValues}
                   onSubmit={handleSubmit}
@@ -127,11 +127,20 @@ const Step1: React.FC = () => {
                            type="textarea"
                            touched={touched.note}
                         />
-                        <Button
-                           isDisabled={isDisabled}
-                           isLoading={isLoading}
-                           buttonText="Confirm"
-                        />
+                        <div className="flex flex-row content-start">
+                           <Button
+                              customClass="bg-black text-white mx-1"
+                              isDisabled={isDisabled}
+                              isLoading={isLoading}
+                              buttonText="Confirm"
+                           />
+                           <Button
+                              customClass="text-black bg-white border border-black mx-1"
+                              isDisabled={isDisabled}
+                              isLoading={isLoading}
+                              buttonText="Cancel"
+                           />
+                        </div>
                      </form>
                   )}
                </Formik>

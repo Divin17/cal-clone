@@ -41,15 +41,15 @@ const Login: React.FC = () => {
    };
    return (
       <>
-         <div className="h-screen flex bg-gray-bg1">
+         <div className="flex h-screen bg-gray-bg1">
             <div className="w-full max-w-md m-auto">
-               <h1 className="text-3xl font-bold text-primary text-center mb-6">
+               <h1 className="mb-6 text-3xl font-bold text-center text-primary">
                   Cal.com
                </h1>
-               <h1 className="text-3xl font-bold text-primary text-center mb-6">
+               <h1 className="mb-6 text-3xl font-bold text-center text-primary">
                   Signin to your account
                </h1>
-               <div className="w-full max-w-md m-auto bg-white border border-primaryBorder shadow-default py-10 px-16">
+               <div className="w-full max-w-md px-16 py-10 m-auto bg-white border border-primaryBorder shadow-default">
                   <Formik
                      initialValues={{
                         email: "",
@@ -94,6 +94,7 @@ const Login: React.FC = () => {
                               touched={touched.password}
                            />
                            <Button
+                              customClass="text-white bg-black"
                               isDisabled={isDisabled}
                               isLoading={isLoading}
                               buttonText="Sign in"
@@ -102,10 +103,10 @@ const Login: React.FC = () => {
                      )}
                   </Formik>
                </div>
-               <p className="text-center text-sm mt-6 ">
+               <p className="mt-6 text-sm text-center ">
                   Doesnt have an account?
                   <Link href="/register">
-                     <a className="underline hover:text-black font-bold">
+                     <a className="font-bold underline hover:text-black">
                         create an account
                      </a>
                   </Link>

@@ -3,6 +3,7 @@ import Spinner from "./Spinner";
 
 export type Props = {
    buttonText: string;
+   customClass: string;
    isDisabled: boolean;
    onClick?: (event: React.FormEvent<HTMLButtonElement>) => void;
    isLoading: boolean;
@@ -14,8 +15,8 @@ const Button: React.FC<Props> = (props) => {
          className={`${
             props.isDisabled
                ? "ring-1 text-red-300 ring-red-300 cursor-not-allowed"
-               : "bg-black hover:bg-black-200"
-         } w-full text-white font-bold py-2 px-4 mt-4 content-center`}
+               : "hover:bg-black-200"
+         } w-full font-bold py-2 px-4 mt-4 content-center ${props.customClass}`}
          type="submit"
          onClick={props.onClick}
          disabled={props.isDisabled}

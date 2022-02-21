@@ -28,7 +28,7 @@ const Login: React.FC = () => {
             .then((res) => {
                localStorage.setItem("token", res.data.token);
                localStorage.setItem("user", JSON.stringify(res.data.data));
-               Router.push("/transactions");
+               Router.push("/events");
             })
             .catch((error) => {
                alert(error.response.data.error);

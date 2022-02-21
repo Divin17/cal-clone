@@ -62,11 +62,10 @@ const TextInput: React.FC<Props> = (props) => {
                onChange={props.onChange}
                onBlur={props.onBlur}
                maxLength={props.max}
+               defaultValue={props.preValue}
                id={props.id}
                placeholder={props.placeholder ?? ""}
-            >
-               {props.preValue}
-            </textarea>
+            ></textarea>
          );
          break;
       default:

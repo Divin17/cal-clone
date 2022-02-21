@@ -53,8 +53,8 @@ const Step1: React.FC = () => {
 
    return (
       <>
-         <div className="max-h-fit max-w-screen-lg flex flex-row bg-gray-bg1 mx-40 my-20 border border-primaryBorder shadow-default">
-            <div className="w-1/2 py-10 px-16 border-r">
+         <div className="h-full max-w-4xl m-auto mt-20 flex flex-row bg-white border shadow-default">
+            <div className="w-1/2 border-r m-auto py-10 px-16">
                <div className="w-1/6">
                   <Image
                      src="/images/user.png"
@@ -74,7 +74,7 @@ const Step1: React.FC = () => {
                   </div>
                </div>
             </div>
-            <div className=" w-1/2 max-w-lg m-auto bg-white px-16 py-12">
+            <div className=" w-1/2 max-w-lg bg-white py-10 px-16">
                <Formik
                   initialValues={initialValues}
                   onSubmit={handleSubmit}

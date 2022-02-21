@@ -7,7 +7,7 @@ const Events: React.FC = () => {
    // setEvents(null);
    return (
       <>
-         <div className="bg-gray-100 p-20 px-9 h-full">
+         <div className="bg-gray-100 p-20 px-9 h-screen">
             <h1 className="font-bold text-2xl">Bookings</h1>
             <p className="text-gray-400 mb-12">
                See upcoming and past events booked through your event type links

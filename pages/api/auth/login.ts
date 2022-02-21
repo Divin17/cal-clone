@@ -1,8 +1,9 @@
 import bcrypt from "bcryptjs";
 import prisma from "../../../lib/prisma";
 import { encodeToken } from "../../../helpers/auth";
+import { NextApiRequest, NextApiResponse } from "next";
 
-const login = async (req: any, res: any) => {
+const login = async (req: NextApiRequest, res: NextApiResponse) => {
    if (req.method === "POST") {
       try {
          const { email, password } = req.body;

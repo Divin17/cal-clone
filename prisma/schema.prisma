@@ -18,13 +18,15 @@ model User {
   createdAt DateTime   @default(now()) @map(name: "created_at")
   updatedAt DateTime   @updatedAt @map(name: "updated_at")
   attendees Attendee[]
-  meetings  Meeting[]
+  events    Event[]
 
   @@map(name: "users")
 }
 
-model Meeting {
+model Event {
   id              Int        @id @default(autoincrement())
+  name            String?
+  email           String?
   organizer       User?      @relation(fields: [organizerId], references: [id])
   organizerId     Int?
   date            DateTime
@@ -33,15 +35,15 @@ model Meeting {
   updatedAt       DateTime   @updatedAt @map(name: "updated_at")
   attendee        Attendee[]
 
-  @@map(name: "meetings")
+  @@map(name: "events")
 }
 
 model Attendee {
   id         Int      @id @default(autoincrement())
   attendee   User?    @relation(fields: [attendeeId], references: [id])
   attendeeId Int?
-  meeting    Meeting? @relation(fields: [meetingId], references: [id])
-  meetingId  Int?
+  event      Event?   @relation(fields: [eventId], references: [id])
+  eventId    Int?
   createdAt  DateTime @default(now()) @map(name: "created_at")
   updatedAt  DateTime @updatedAt @map(name: "updated_at")
 

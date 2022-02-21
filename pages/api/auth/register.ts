@@ -1,13 +1,17 @@
 import bcrypt from "bcryptjs";
 import prisma from "../../../lib/prisma";
 import { encodeToken } from "../../../helpers/auth";
+import { NextApiRequest, NextApiResponse } from "next";
 /**
  *this is a user registration page
  *@param {Object} req for request.
  *@param {Object} res for result.
  *@return {void}
  **/
-export default async function signUp(req: any, res: any) {
+export default async function signUp(
+   req: NextApiRequest,
+   res: NextApiResponse
+) {
    if (req.method === "POST") {
       try {
          const { name, email, password } = req.body;

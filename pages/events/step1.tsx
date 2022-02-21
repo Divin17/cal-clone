@@ -3,58 +3,30 @@ import Image from "next/image";
 import Router from "next/router";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
 import TextInput from "../../components/Form/TextInput";
 import Button from "../../components/Form/Button";
 
-const Step1: React.FC = () => {
+const Step2: React.FC = () => {
    const [isLoading, setLoading] = useState<boolean>(false);
    const [isDisabled, setDisabled] = useState<boolean>(false);
    const initialValues = {
-      name: "",
-      email: "",
-      note: "",
+      date: "",
    };
    // All Validations
    const insertingValidationSchema = Yup.object().shape({
-      name: Yup.string().required().label("Name"),
-      email: Yup.string().email().required().label("Email"),
-      note: Yup.string().required().label("note"),
+      date: Yup.string().required().label("Date"),
    });
    const handleSubmit = async (values: any, onSubmitProps: any) => {
-      try {
-         setLoading(true);
-         setDisabled(false);
-         // eslint-disable-next-line no-unused-vars
-         const body = {
-            name: values.name,
-            email: values.email,
-            note: values.note,
-         };
-         // eslint-disable-next-line no-unused-vars
-         const result = await axios
-            .post("api/auth/register", {
-               name: values.name,
-               email: values.email,
-               note: values.note,
-            })
-            .then((res) => {
-               Router.push("/login");
-            })
-            .catch((error) => {
-               alert(error.response.data.error);
-               setLoading(false);
-            });
-      } catch (error) {
-         setLoading(false);
-         console.error(error);
-      }
+      setLoading(true);
+      setDisabled(false);
+      localStorage.setItem("dateTime", values.date);
+      Router.push("step2");
    };
 
    return (
       <>
-         <div className="flex flex-row h-full max-w-4xl m-auto mt-20 bg-white border shadow-default">
-            <div className="w-1/2 px-16 py-10 m-auto border-r">
+         <div className="flex flex-row h-full max-w-4xl m-auto mt-20 border shadow-default">
+            <div className="w-1/2 px-16 my-10 border-r">
                <div className="w-1/6">
                   <Image
                      src="/images/user.png"
@@ -92,53 +64,23 @@ const Step1: React.FC = () => {
                   }) => (
                      <form onSubmit={handleSubmit}>
                         <TextInput
-                           onChange={handleChange("name")}
-                           onBlur={handleBlur("name")}
-                           id="name"
-                           label="name"
-                           name="name"
-                           errorMessage={errors.name}
-                           preValue={values.name}
+                           onChange={handleChange("date")}
+                           onBlur={handleBlur("date")}
+                           id="date"
+                           label="date"
+                           name="date"
+                           errorMessage={errors.date}
+                           preValue={values.date}
                            placeholder=""
-                           type="text"
-                           touched={touched.name}
-                        />
-                        <TextInput
-                           onChange={handleChange("email")}
-                           onBlur={handleBlur("email")}
-                           id="email"
-                           label="Email"
-                           name="email"
-                           errorMessage={errors.email}
-                           preValue={values.email}
-                           placeholder=""
-                           type="text"
-                           touched={touched.email}
-                        />
-                        <TextInput
-                           onChange={handleChange("note")}
-                           onBlur={handleBlur("note")}
-                           id="note"
-                           label="Additional notes"
-                           name="note"
-                           errorMessage={errors.note}
-                           preValue={values.note}
-                           placeholder=""
-                           type="textarea"
-                           touched={touched.note}
+                           type="datetime-local"
+                           touched={touched.date}
                         />
                         <div className="flex flex-row content-start">
                            <Button
-                              customClass="bg-black text-white mx-1"
+                              customClass="bg-black text-white"
                               isDisabled={isDisabled}
                               isLoading={isLoading}
-                              buttonText="Confirm"
-                           />
-                           <Button
-                              customClass="text-black bg-white border border-black mx-1"
-                              isDisabled={isDisabled}
-                              isLoading={isLoading}
-                              buttonText="Cancel"
+                              buttonText="Next"
                            />
                         </div>
                      </form>
@@ -149,4 +91,4 @@ const Step1: React.FC = () => {
       </>
    );
 };
-export default Step1;
+export default Step2;

@@ -11,38 +11,39 @@ datasource db {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
+  id        Int        @id @default(autoincrement())
   name      String?
-  email     String?   @unique
-  createdAt DateTime  @default(now()) @map(name: "created_at")
-  updatedAt DateTime  @updatedAt @map(name: "updated_at")
-  attendees    Attendee[]
+  email     String?    @unique
+  password  String?
+  createdAt DateTime   @default(now()) @map(name: "created_at")
+  updatedAt DateTime   @updatedAt @map(name: "updated_at")
+  attendees Attendee[]
   meetings  Meeting[]
 
   @@map(name: "users")
 }
 
 model Meeting {
-  id              Int      @id @default(autoincrement())
-  organizer       User?    @relation(fields: [organizerId], references: [id])
+  id              Int        @id @default(autoincrement())
+  organizer       User?      @relation(fields: [organizerId], references: [id])
   organizerId     Int?
   date            DateTime
   additional_note String?
-  createdAt       DateTime @default(now()) @map(name: "created_at")
-  updatedAt       DateTime @updatedAt @map(name: "updated_at")
-  attendee           Attendee[]
+  createdAt       DateTime   @default(now()) @map(name: "created_at")
+  updatedAt       DateTime   @updatedAt @map(name: "updated_at")
+  attendee        Attendee[]
 
   @@map(name: "meetings")
 }
 
 model Attendee {
-  id        Int      @id @default(autoincrement())
-  attendee     User?    @relation(fields: [attendeeId], references: [id])
-  attendeeId   Int?
-  meeting   Meeting? @relation(fields: [meetingId], references: [id])
-  meetingId Int?
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @updatedAt @map(name: "updated_at")
+  id         Int      @id @default(autoincrement())
+  attendee   User?    @relation(fields: [attendeeId], references: [id])
+  attendeeId Int?
+  meeting    Meeting? @relation(fields: [meetingId], references: [id])
+  meetingId  Int?
+  createdAt  DateTime @default(now()) @map(name: "created_at")
+  updatedAt  DateTime @updatedAt @map(name: "updated_at")
 
   @@map(name: "attendees")
 }

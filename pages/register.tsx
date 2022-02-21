@@ -54,8 +54,8 @@ const Register: React.FC = () => {
 
    return (
       <>
-         <div className="h-screen flex flex-row bg-gray-bg1">
-            <div className="w-1/2 py-10 px-16">
+         <div className="h-screen max-w-7xl m-auto flex flex-row">
+            <div className="w-1/2 m-auto">
                <h1 className="text-3xl font-bold text-primary mb-6">Cal.com</h1>
                <h1 className="text-6xl font-bold text-primary mb-6">
                   You are one step away from simple scheduling

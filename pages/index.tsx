@@ -7,7 +7,9 @@ import Router from "next/router";
 export default function Home() {
    useEffect(() => {
       const user = JSON.parse(localStorage.getItem("user") || "{}");
-      user ? Router.push("/events") : Router.push("/login");
+      Object.keys(user).length !== 0
+         ? Router.push("/events")
+         : Router.push("/login");
    }, []);
    return <div></div>;
 }

@@ -14,7 +14,6 @@ export default async function createEvent(
    if (req.method === "POST") {
       try {
          const { name, email, note, date } = req.body;
-         console.log(name, email, note, date);
          const event: any = await prisma.event
             .create({
                data: {

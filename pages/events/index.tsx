@@ -11,7 +11,7 @@ const Events: React.FC = () => {
    const [user, setUser] = useState<any>(null);
    useEffect(() => {
       const currentUser = JSON.parse(localStorage.getItem("user") || "{}");
-      if (!Boolean(currentUser)) {
+      if (currentUser) {
          Router.push("/login");
          return;
       }

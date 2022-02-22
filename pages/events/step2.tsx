@@ -35,7 +35,7 @@ const Step2: React.FC = () => {
                date,
             })
             .then((res) => {
-               Router.push("/success");
+               Router.push("success");
             })
             .catch((error) => {
                alert(error.response.data.error);

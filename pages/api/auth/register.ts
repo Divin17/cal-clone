@@ -29,16 +29,13 @@ export default async function signUp(
          }
          const salt = bcrypt.genSaltSync(10);
          const hash = bcrypt.hashSync(password, salt);
-         const user: any = await prisma.user
-            .create({
-               data: {
-                  name,
-                  email,
-                  password: hash,
-               },
-            })
-            .then((res) => console.log(res))
-            .catch((error) => console.log(error));
+         const user: any = await prisma.user.create({
+            data: {
+               name,
+               email,
+               password: hash,
+            },
+         });
          const token = encodeToken(user);
          delete user.password;
          res.status(200).json({

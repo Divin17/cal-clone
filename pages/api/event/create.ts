@@ -21,7 +21,7 @@ export default async function createEvent(
                   name,
                   email,
                   additional_note: note,
-                  date,
+                  date: new Date(date),
                },
             })
             .then((res) => {

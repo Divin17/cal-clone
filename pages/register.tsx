@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Router from "next/router";
@@ -22,6 +22,10 @@ const Register: React.FC = () => {
       email: Yup.string().email().required().label("Email"),
       password: Yup.string().required().label("Password"),
    });
+   useEffect(() => {
+      const user = JSON.parse(localStorage.getItem("user") || "{}");
+      Boolean(user) ? Router.push("/events") : null;
+   }, []);
    const handleSubmit = async (values: any, onSubmitProps: any) => {
       try {
          setLoading(true);

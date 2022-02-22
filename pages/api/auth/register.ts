@@ -31,8 +31,8 @@ export default async function signUp(
          const hash = bcrypt.hashSync(password, salt);
          const user: any = await prisma.user.create({
             data: {
-               name: name,
-               email: email,
+               name,
+               email,
                password: hash,
             },
          });

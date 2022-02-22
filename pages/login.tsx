@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
 import Router from "next/router";
@@ -15,6 +15,10 @@ const Login: React.FC = () => {
       email: Yup.string().email().required().label("Email"),
       password: Yup.string().required().label("Password"),
    });
+   useEffect(() => {
+      const user = JSON.parse(localStorage.getItem("user") || "{}");
+      Object.keys(user).length !== 0 ? Router.push("/events") : null;
+   }, []);
    const handleSubmit = async (values: any, onSubmitProps: any) => {
       try {
          setLoading(true);

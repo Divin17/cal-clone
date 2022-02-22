@@ -24,7 +24,7 @@ const Register: React.FC = () => {
    });
    useEffect(() => {
       const user = JSON.parse(localStorage.getItem("user") || "{}");
-      Boolean(user) ? Router.push("/events") : null;
+      Object.keys(user).length !== 0 ? Router.push("/events") : null;
    }, []);
    const handleSubmit = async (values: any, onSubmitProps: any) => {
       try {

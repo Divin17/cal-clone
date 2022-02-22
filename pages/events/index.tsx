@@ -11,8 +11,9 @@ const Events: React.FC = () => {
    const [user, setUser] = useState<any>(null);
    useEffect(() => {
       const currentUser = JSON.parse(localStorage.getItem("user") || "{}");
-      if (currentUser) {
-         Router.push("/login");
+      console.log("**************************", currentUser);
+      if (Object.keys(currentUser).length === 0) {
+         Router.push("/events/step1");
          return;
       }
       const getEvents = async (id: number) => {

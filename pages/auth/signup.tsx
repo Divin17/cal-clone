@@ -9,6 +9,11 @@ import * as Yup from "yup";
 import Button from "../../components/Form/Button";
 import TextInput from "../../components/Form/TextInput";
 
+export type User = {
+  name: string;
+  email: string;
+  password: string;
+};
 export default function Signup() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const initialValues = {
@@ -31,7 +36,7 @@ export default function Signup() {
     redirectOnLogin();
   }, []);
 
-  async function handleSubmit(values: any, onSubmitProps: any) {
+  async function handleSubmit(values: User) {
     if (isSubmitting) {
       return;
     }

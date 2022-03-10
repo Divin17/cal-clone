@@ -23,13 +23,12 @@ const Events: React.FC = () => {
   const [user, setUser] = useState(null);
   useEffect(() => {
     const currentUser = JSON.parse(localStorage.getItem("user") || "{}");
-    console.log("**************************", currentUser);
     if (Object.keys(currentUser).length === 0) {
       Router.push("/events/step1");
       return;
     }
     const getEvents = async (id: number) => {
-      const res = await axios.get(`/api/event`);
+      const res = await axios.get(`/api/event?id=` + id);
       setEvents(res.data.data);
     };
     const getCurrentUser = async (id: number) => {

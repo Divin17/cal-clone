@@ -1,19 +1,24 @@
 import React from "react";
 
+export type SelectOption = {
+  id: number;
+  name: string;
+  value: string;
+};
 export type Props = {
   id: string;
   name: string;
-  onChange: (event: any) => void;
-  onBlur: (event: any) => void;
+  onChange: (event: React.FormEvent<HTMLButtonElement>) => void;
+  onBlur: (event: React.FormEvent<HTMLButtonElement>) => void;
   label: string;
-  errorMessage?: any;
+  errorMessage?: string;
   placeholder: string;
   max?: number;
   required?: boolean;
-  touched?: any;
+  touched?: boolean;
   preValue?: string | number;
   type: string;
-  options?: any;
+  options?: SelectOption;
 };
 
 const TextInput: React.FC<Props> = (props) => {
@@ -31,7 +36,7 @@ const TextInput: React.FC<Props> = (props) => {
             onBlur={props.onBlur}>
             <option>Select {props.label}</option>
             {props.options
-              ? props.options.map((option: any) => (
+              ? props.options.map((option) => (
                   <option key={option.id} value={option.id}>
                     {option.name}
                   </option>

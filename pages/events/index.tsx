@@ -2,6 +2,7 @@ import axios from "axios";
 import moment from "moment";
 import Router from "next/router";
 import React, { useState, useEffect } from "react";
+import { useQuery } from "react-query";
 
 import Spinner from "../../components/Form/Spinner";
 import Event from "../../components/Layout/Event";
@@ -23,10 +24,6 @@ const Events: React.FC = () => {
   const [user, setUser] = useState(null);
   useEffect(() => {
     const currentUser = JSON.parse(localStorage.getItem("user") || "{}");
-    if (Object.keys(currentUser).length === 0) {
-      Router.push("/events/step1");
-      return;
-    }
     const getEvents = async (id: number) => {
       const res = await axios.get(`/api/event?id=` + id);
       setEvents(res.data.data);

@@ -1,9 +1,16 @@
+import { Formik } from "formik";
 import { GetServerSidePropsContext } from "next";
 import { getCsrfToken, signIn } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import * as Yup from "yup";
 
 import { getSession } from "@helpers/auth";
+
+import Button from "../../components/Form/Button";
+import TextInput from "../../components/Form/TextInput";
+import { User } from "./signup.tsx";
 
 interface ServerSideProps {
   csrfToken: string;
@@ -11,15 +18,14 @@ interface ServerSideProps {
 
 export default function Login({ csrfToken }: ServerSideProps) {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const callbackUrl = typeof router.query?.callbackUrl === "string" ? router.query.callbackUrl : "/private";
-
-  async function handleSubmit(e: React.SyntheticEvent) {
-    e.preventDefault();
-
+  const insertingValidationSchema = Yup.object().shape({
+    email: Yup.string().email().required().label("Email"),
+    password: Yup.string().required().label("Password"),
+  });
+  async function handleSubmit(values: User) {
     if (isSubmitting) {
       return;
     }
@@ -28,50 +34,83 @@ export default function Login({ csrfToken }: ServerSideProps) {
 
     const response = await signIn<"credentials">("credentials", {
       redirect: false,
-      email,
-      password,
+      email: values.email,
+      password: values.password,
       callbackUrl,
     });
     if (!response) {
       throw new Error("Received empty response from next auth");
     }
 
-    if (!response.error) {
-      // we're logged in! let's do a hard refresh to the desired url
-      window.location.replace(callbackUrl);
-      return;
+    if (response.error) {
+      setIsSubmitting(false);
+      alert("Credentials not matching");
+      throw new Error("Login Failed");
     }
+    window.location.replace(callbackUrl);
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input name="csrfToken" type="hidden" defaultValue={csrfToken || undefined} hidden />
-      <input
-        id="email"
-        name="email"
-        type="email"
-        placeholder="email"
-        required
-        value={email}
-        onInput={(e) => setEmail(e.currentTarget.value)}
-        className="block border border-neutral-300 focus:ring-neutral-900"
-      />
-      <input
-        id="password"
-        name="password"
-        type="password"
-        placeholder="password"
-        autoComplete="current-password"
-        required
-        value={password}
-        onInput={(e) => setPassword(e.currentTarget.value)}
-        className="block border border-neutral-300 focus:ring-neutral-900"
-      />
-
-      <button type="submit" disabled={isSubmitting} className="p-1 text-white bg-blue-800">
-        SIGN IN
-      </button>
-    </form>
+    <>
+      <div className="flex h-screen bg-gray-100">
+        <div className="w-full max-w-md m-auto">
+          <h1 className="mb-6 text-3xl font-bold text-center text-primary">Cal.com</h1>
+          <h1 className="mb-6 text-3xl font-bold text-center text-primary">Signin to your account</h1>
+          <div className="w-full max-w-md px-16 py-10 m-auto bg-white border border-primaryBorder shadow-default">
+            <Formik
+              initialValues={{
+                email: "",
+                password: "",
+              }}
+              onSubmit={handleSubmit}
+              enableReinitialize
+              validationSchema={insertingValidationSchema}>
+              {({ values, handleChange, handleSubmit, setFieldValue, touched, handleBlur, errors }) => (
+                <form onSubmit={handleSubmit}>
+                  <input name="csrfToken" type="hidden" defaultValue={csrfToken || undefined} hidden />
+                  <TextInput
+                    onChange={handleChange("email")}
+                    onBlur={handleBlur("email")}
+                    id="email"
+                    label="Email address"
+                    name="email"
+                    errorMessage={errors.email}
+                    preValue={values.email}
+                    placeholder=""
+                    type="email"
+                    touched={touched.email}
+                  />
+                  <TextInput
+                    onChange={handleChange("password")}
+                    onBlur={handleBlur("password")}
+                    id="password"
+                    label="Password"
+                    name="password"
+                    errorMessage={errors.password}
+                    preValue={values.password}
+                    placeholder=""
+                    type="password"
+                    touched={touched.password}
+                  />
+                  <Button
+                    customClass="text-white bg-black"
+                    isDisabled={isSubmitting}
+                    isLoading={isSubmitting}
+                    buttonText="Sign in"
+                  />
+                </form>
+              )}
+            </Formik>
+          </div>
+          <p className="mt-6 text-sm text-center ">
+            Doesnt have an account?
+            <Link href="/auth/signup">
+              <a className="font-bold underline hover:text-black">create an account</a>
+            </Link>
+          </p>
+        </div>
+      </div>
+    </>
   );
 }
 

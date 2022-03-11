@@ -150,7 +150,7 @@ export default function Signup() {
           </Formik>
           <p className="mt-5 text-sm text-center ">
             Already have an account?
-            <Link href="/login">
+            <Link href="/auth/login">
               <a className="underline hover:text-black">Login</a>
             </Link>
           </p>

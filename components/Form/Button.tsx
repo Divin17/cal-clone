@@ -14,7 +14,7 @@ const Button: React.FC<Props> = (props) => {
   return (
     <button
       className={`${
-        props.isDisabled ? "ring-1 text-red-300 ring-red-300 cursor-not-allowed" : "hover:bg-black-200"
+        props.isDisabled ? "opacity-80 cursor-not-allowed" : "hover:bg-black-200"
       } w-full font-bold py-2 px-4 mt-4 content-center ${props.customClass}`}
       type="submit"
       onClick={props.onClick}

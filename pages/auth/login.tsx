@@ -10,13 +10,17 @@ import { getSession } from "@helpers/auth";
 
 import Button from "../../components/Form/Button";
 import TextInput from "../../components/Form/TextInput";
-import { User } from "./signup.tsx";
+import { User } from "./signup";
 
 interface ServerSideProps {
   csrfToken: string;
 }
 
 export default function Login({ csrfToken }: ServerSideProps) {
+  const initialValues = {
+    email: "",
+    password: "",
+  };
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -58,10 +62,7 @@ export default function Login({ csrfToken }: ServerSideProps) {
           <h1 className="mb-6 text-3xl font-bold text-center text-primary">Signin to your account</h1>
           <div className="w-full max-w-md px-16 py-10 m-auto bg-white border border-primaryBorder shadow-default">
             <Formik
-              initialValues={{
-                email: "",
-                password: "",
-              }}
+              initialValues={initialValues}
               onSubmit={handleSubmit}
               enableReinitialize
               validationSchema={insertingValidationSchema}>

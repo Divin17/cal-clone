@@ -1,5 +1,3 @@
 import { QueryClient } from "react-query";
 
-const client = new QueryClient();
-
-export default client;
+export const client = new QueryClient();

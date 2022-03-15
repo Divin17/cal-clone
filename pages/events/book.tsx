@@ -9,24 +9,33 @@ import * as Yup from "yup";
 
 import Button from "../../components/Form/Button";
 import TextInput from "../../components/Form/TextInput";
-import client from "../react-query-client";
+import { client } from "../react-query-client";
 import { Event } from "./index";
 
+type EventType = {
+  id: number;
+  slug: string;
+  name: string;
+  duration: number;
+  createdAt: Date;
+  updatedAt: Date;
+  events: object;
+};
 const Book: React.FC = () => {
   const [isLoading, setLoading] = useState<boolean>(false);
   const initialValues = {
     name: "",
     email: "",
-    note: "",
+    additional_note: "",
   };
   const router = useRouter();
   const date = router.query["date"];
   const type = router.query["type"];
   const slug = router.query["slug"];
-  const event_type = client.getQueryData(["event_type", slug]);
+  const event_type: EventType | undefined = client.getQueryData(["event_type", slug]);
 
-  const createEvent = async (data) => await axios.post(`/api/events/create`, data);
-  const mutation = useMutation((data) => createEvent(data), {
+  const createEvent = async (data: Event) => await axios.post(`/api/events/create`, data);
+  const mutation = useMutation((data: Event) => createEvent(data), {
     onSuccess(data) {
       console.log({ data });
       setLoading(false);
@@ -41,18 +50,19 @@ const Book: React.FC = () => {
   const insertingValidationSchema = Yup.object().shape({
     name: Yup.string().required().label("Name"),
     email: Yup.string().email().required().label("Email"),
-    note: Yup.string().required().label("note"),
+    additional_note: Yup.string().required().label("additional_note"),
   });
   const handleSubmit = async (values: Event) => {
-    setLoading(true);
+    console.log(isLoading);
+
     if (isLoading) return;
-    // eslint-disable-next-line no-unused-vars
+    setLoading(true);
     mutation.mutate({
       name: values.name,
       email: values.email,
-      note: values.note,
-      date,
-      eventTypeId: type,
+      additional_note: values.additional_note,
+      date: date as string,
+      eventTypeId: type as string,
     });
   };
 
@@ -110,16 +120,16 @@ const Book: React.FC = () => {
                 />
                 <h3 className="my-4 font-bold">+ Additional Guests</h3>
                 <TextInput
-                  onChange={handleChange("note")}
-                  onBlur={handleBlur("note")}
-                  id="note"
+                  onChange={handleChange("additional_note")}
+                  onBlur={handleBlur("additional_note")}
+                  id="additional_note"
                   label="Additional notes"
-                  name="note"
-                  errorMessage={errors.note}
-                  preValue={values.note}
+                  name="additional_note"
+                  errorMessage={errors.additional_note}
+                  preValue={values.additional_note}
                   placeholder="Share something that might be useful in preparing this meeting"
                   type="textarea"
-                  touched={touched.note}
+                  touched={touched.additional_note}
                 />
                 <div className="flex flex-row content-start">
                   <Button

@@ -10,7 +10,7 @@ import Button from "../../components/Form/Button";
 import TextInput from "../../components/Form/TextInput";
 
 export type User = {
-  name: string;
+  name?: string;
   email: string;
   password: string;
 };

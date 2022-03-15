@@ -4,7 +4,7 @@ import { QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
 import "../styles/globals.css";
-import client from "./react-query-client";
+import { client } from "./react-query-client";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (

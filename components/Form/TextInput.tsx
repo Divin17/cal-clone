@@ -17,7 +17,7 @@ export type Props = {
   max?: number;
   required?: boolean;
   touched?: boolean;
-  preValue?: string | number;
+  preValue?: string | number | Date;
   type: string;
   options?: SelectOption[];
 };
@@ -63,7 +63,7 @@ const TextInput: React.FC<Props> = (props) => {
           onChange={props.onChange}
           onBlur={props.onBlur}
           maxLength={props.max}
-          defaultValue={props.preValue}
+          defaultValue={props.preValue as string}
           id={props.id}
           placeholder={props.placeholder ?? ""}></textarea>
       );
@@ -78,7 +78,7 @@ const TextInput: React.FC<Props> = (props) => {
           type={props.type}
           onChange={props.onChange}
           onBlur={props.onBlur}
-          defaultValue={props.preValue}
+          defaultValue={props.preValue as string}
           maxLength={props.max}
           id={props.id}
           placeholder={props.placeholder ?? ""}
@@ -95,7 +95,7 @@ const TextInput: React.FC<Props> = (props) => {
           type={props.type}
           onChange={props.onChange}
           onBlur={props.onBlur}
-          defaultValue={props.preValue}
+          defaultValue={props.preValue as string}
           maxLength={props.max}
           id={props.id}
           placeholder={props.placeholder ?? ""}

@@ -7,31 +7,33 @@ import { useQuery } from "react-query";
 import * as Yup from "yup";
 
 import Button from "../../components/Form/Button";
+import Spinner from "../../components/Form/Spinner";
 import TextInput from "../../components/Form/TextInput";
 
+type Event = {
+  date: Date;
+};
 const EventType: React.FC = () => {
-  const [isLoading, setLoading] = useState<boolean>(false);
-  const [isDisabled, setDisabled] = useState<boolean>(false);
   const initialValues = {
-    date: "",
+    date: new Date(),
   };
   const router = useRouter();
 
   const slug = router.query["event-type"];
-  const getEventType = async (slug) => {
+  const getEventType = async (slug: string) => {
     const res = await axios.get(`/api/event-type/` + slug);
     return res.data.data;
   };
-  const { data: event_type } = useQuery(["event_type", slug], () => (slug ? getEventType(slug) : null));
+  const { data: event_type, isLoading } = useQuery(["event_type", slug], () =>
+    slug ? getEventType(slug as string) : null
+  );
   console.log({ event_type });
 
   // All Validations
   const insertingValidationSchema = Yup.object().shape({
     date: Yup.string().required().label("Date"),
   });
-  const handleSubmit = async (values) => {
-    setLoading(true);
-    setDisabled(false);
+  const handleSubmit = async (values: Event) => {
     Router.push("book?type=" + event_type.id + "&slug=" + event_type.slug + "&date=" + values.date);
   };
 
@@ -52,7 +54,9 @@ const EventType: React.FC = () => {
               </div>
             </div>
           </div>
-        ) : null}
+        ) : (
+          <Spinner />
+        )}
         <div className="w-1/2 max-w-lg px-16 py-10 bg-white ">
           <Formik
             initialValues={initialValues}
@@ -67,16 +71,16 @@ const EventType: React.FC = () => {
                   id="date"
                   label="date"
                   name="date"
-                  errorMessage={errors.date}
+                  errorMessage={errors.date as string}
                   preValue={values.date}
                   placeholder=""
                   type="datetime-local"
-                  touched={touched.date}
+                  touched={Boolean(touched.date)}
                 />
                 <div className="flex flex-row content-start">
                   <Button
                     customClass="bg-black text-white"
-                    isDisabled={isDisabled}
+                    isDisabled={isLoading}
                     isLoading={isLoading}
                     buttonText="Next"
                   />

@@ -3,8 +3,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 import prisma from "@helpers/prisma";
 
-import { Event } from "../../events/index.tsx";
-
 /**
  *this is a user registration page
  *@param {Object} req for request.
@@ -14,12 +12,12 @@ import { Event } from "../../events/index.tsx";
 export default async function createEvent(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     try {
-      const { name, email, note, date, eventTypeId } = req.body;
-      const event: Event = await prisma.event.create({
+      const { name, email, additional_note, date, eventTypeId } = req.body;
+      const event = await prisma.event.create({
         data: {
-          name,
-          email,
-          additional_note: note,
+          name: name,
+          email: email,
+          additional_note: additional_note,
           eventTypeId: parseInt(eventTypeId),
           date: new Date(date),
         },

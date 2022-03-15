@@ -8,17 +8,18 @@ import Shell from "@components/Shell";
 import Spinner from "../../components/Form/Spinner";
 import Event from "../../components/Layout/Event";
 import Navbar from "../../components/Layout/Navbar";
-import User from "../api/auth/signup";
+import User from "../auth/signup";
 
-type Event = {
+export type Event = {
+  id?: number;
   name: string;
   email: string;
-  date: DateTime;
+  date?: string;
   additional_note: string;
-  organizer: User;
-  organizerId: number;
-  eventType: object;
-  eventTypeId: number;
+  organizer?: typeof User;
+  organizerId?: number;
+  eventType?: object;
+  eventTypeId?: number | string;
 };
 const Events: React.FC = () => {
   const getEvents = async () => {

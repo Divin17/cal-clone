@@ -20,7 +20,7 @@ export default function Login({ csrfToken }: ServerSideProps) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const callbackUrl = typeof router.query?.callbackUrl === "string" ? router.query.callbackUrl : "/private";
+  const callbackUrl = typeof router.query?.callbackUrl === "string" ? router.query.callbackUrl : "/events";
   const insertingValidationSchema = Yup.object().shape({
     email: Yup.string().email().required().label("Email"),
     password: Yup.string().required().label("Password"),

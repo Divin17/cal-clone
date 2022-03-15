@@ -21,7 +21,6 @@ export default function Shell(props: { children: ReactNode }) {
 
   return (
     <div>
-      <h1 className="py-4 text-xl font-bold">SHELL COMPONENT</h1>
       <div>{props.children}</div>
     </div>
   );

@@ -7,7 +7,7 @@ export default function Index() {
   const loading = status === "loading";
 
   useEffect(() => {
-    if (session) window.location.replace("/private");
+    if (session) window.location.replace("/events");
   }, [loading, session]);
 
   return (

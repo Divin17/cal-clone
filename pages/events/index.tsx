@@ -1,8 +1,8 @@
 import axios from "axios";
 import moment from "moment";
-import Router from "next/router";
-import React, { useState, useEffect } from "react";
 import { useQuery } from "react-query";
+
+import Shell from "@components/Shell";
 
 import Spinner from "../../components/Form/Spinner";
 import Event from "../../components/Layout/Event";
@@ -20,32 +20,21 @@ type Event = {
   eventTypeId: number;
 };
 const Events: React.FC = () => {
-  const [events, setEvents] = useState(null);
-  const [user, setUser] = useState(null);
-  useEffect(() => {
-    const currentUser = JSON.parse(localStorage.getItem("user") || "{}");
-    const getEvents = async (id: number) => {
-      const res = await axios.get(`/api/event?id=` + id);
-      setEvents(res.data.data);
-    };
-    const getCurrentUser = async (id: number) => {
-      const res_ = await axios.get(`/api/auth/${id}`);
-      setUser(res_.data.data[0]);
-      console.log(user);
-    };
-    getEvents(currentUser.id);
-    getCurrentUser(currentUser.id);
-  }, [events, user]);
+  const getEvents = async () => {
+    const res = await axios.get(`/api/event`);
+    return res.data.data;
+  };
+  const { data: events, isLoading } = useQuery("events", getEvents);
 
   return (
-    <>
+    <Shell>
       <div className="h-screen p-20 bg-gray-100 px-9">
         <h1 className="text-2xl font-bold">Bookings</h1>
         <p className="mb-12 text-gray-400">
           See upcoming and past events booked through your event type links
         </p>
         <Navbar />
-        {events ? (
+        {events && !isLoading ? (
           events.map((event: Event) => (
             <Event
               key={event.id}
@@ -64,7 +53,7 @@ const Events: React.FC = () => {
           <Spinner class="w-10 h-10 border-[2px] border-black border-dotted rounded-full" />
         )}
       </div>
-    </>
+    </Shell>
   );
 };
 

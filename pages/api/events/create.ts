@@ -14,22 +14,16 @@ import { Event } from "../../events/index.tsx";
 export default async function createEvent(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     try {
-      const { name, email, note, date } = req.body;
-      const event: Event = await prisma.event
-        .create({
-          data: {
-            name,
-            email,
-            additional_note: note,
-            date: new Date(date),
-          },
-        })
-        .then((res) => {
-          console.log("success", res);
-        })
-        .catch((error) => {
-          console.log("error", error);
-        });
+      const { name, email, note, date, eventTypeId } = req.body;
+      const event: Event = await prisma.event.create({
+        data: {
+          name,
+          email,
+          additional_note: note,
+          eventTypeId: parseInt(eventTypeId),
+          date: new Date(date),
+        },
+      });
       console.log(event);
       res.status(200).json({
         status: true,

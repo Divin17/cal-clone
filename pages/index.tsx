@@ -8,6 +8,7 @@ export default function Index() {
 
   useEffect(() => {
     if (session) window.location.replace("/events");
+    else window.location.replace("/login");
   }, [loading, session]);
 
   return (

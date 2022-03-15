@@ -15,8 +15,11 @@ const Success: React.FC = () => {
             <p className="w-3/4">15 Min Meeting between Daniel Tonel and Test</p>
           </div>
           <div className="flex flex-row my-3">
-            <p className="w-1/4">What</p>
-            <p className="w-3/4">Wednesday, 29 December 2021 4:30pm-15 mins (Europe/Vienna)</p>
+            <p className="w-1/4">When</p>
+            <p className="w-3/4">
+              Wednesday, 29 December 2021 4:30pm-15 mins{" "}
+              <span className="text-gray-500">(Europe/Vienna)</span>
+            </p>
           </div>
           <hr />
           <div className="flex flex-row my-3">

@@ -21,7 +21,7 @@ type Event = {
 };
 const Events: React.FC = () => {
   const getEvents = async () => {
-    const res = await axios.get(`/api/event`);
+    const res = await axios.get(`/api/events`);
     return res.data.data;
   };
   const { data: events, isLoading } = useQuery("events", getEvents);

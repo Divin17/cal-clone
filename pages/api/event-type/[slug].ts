@@ -4,8 +4,7 @@ import prisma from "@helpers/prisma";
 
 const getEventType = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "GET") {
-    const { slug } = req.query;
-    console.log({ slug });
+    const { slug }: string = req.query;
     try {
       const event_type = await prisma.eventType.findFirst({
         where: {

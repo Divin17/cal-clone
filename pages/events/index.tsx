@@ -1,5 +1,6 @@
 import axios from "axios";
 import moment from "moment";
+import Link from "next/link";
 import { useQuery } from "react-query";
 
 import Shell from "@components/Shell";
@@ -33,6 +34,10 @@ const Events: React.FC = () => {
         <p className="mb-12 text-gray-400">
           See upcoming and past events booked through your event type links
         </p>
+        <Link href="/api/auth/signout">
+          {/* this is the default next-auth sign-out template. */}
+          <a className="p-1 ml-2 text-white bg-black">LOGOUT</a>
+        </Link>
         <Navbar />
         {events && !isLoading ? (
           events.map((event: Event) => (

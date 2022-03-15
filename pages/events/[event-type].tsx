@@ -22,7 +22,7 @@ const EventType: React.FC = () => {
     const res = await axios.get(`/api/event-type/` + slug);
     return res.data.data;
   };
-  const { data: event_type } = useQuery(["event_type"], () => (slug ? getEventType(slug) : null));
+  const { data: event_type } = useQuery(["event_type", slug], () => (slug ? getEventType(slug) : null));
   console.log({ event_type });
 
   // All Validations
@@ -32,7 +32,7 @@ const EventType: React.FC = () => {
   const handleSubmit = async (values) => {
     setLoading(true);
     setDisabled(false);
-    Router.push("book?type=" + event_type.id + "&date=" + values.date);
+    Router.push("book?type=" + event_type.id + "&slug=" + event_type.slug + "&date=" + values.date);
   };
 
   return (

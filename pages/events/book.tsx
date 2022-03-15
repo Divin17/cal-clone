@@ -22,7 +22,8 @@ const Book: React.FC = () => {
   const router = useRouter();
   const date = router.query["date"];
   const type = router.query["type"];
-  const event_type = client.getQueryData(["event_type"]);
+  const slug = router.query["slug"];
+  const event_type = client.getQueryData(["event_type", slug]);
 
   const createEvent = async (data) => await axios.post(`/api/events/create`, data);
   const mutation = useMutation((data) => createEvent(data), {

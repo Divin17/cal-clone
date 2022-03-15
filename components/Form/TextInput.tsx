@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 
 export type SelectOption = {
@@ -8,8 +9,8 @@ export type SelectOption = {
 export type Props = {
   id: string;
   name: string;
-  onChange?: (event: React.FormEvent<HTMLInputElement>) => string;
-  onBlur?: (event: React.FormEvent<HTMLInputElement>) => string;
+  onChange?: (event: any) => void;
+  onBlur?: (event: any) => void;
   label: string;
   errorMessage?: string;
   placeholder: string;

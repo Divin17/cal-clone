@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 
 import Spinner from "./Spinner";
@@ -7,7 +6,7 @@ export type Props = {
   buttonText: string;
   customClass: string;
   isDisabled: boolean;
-  onClick?: (event: any) => void;
+  onClick?: (event: React.FormEvent<HTMLButtonElement>) => string;
   isLoading: boolean;
 };
 

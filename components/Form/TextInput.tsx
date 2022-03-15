@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 
 export type SelectOption = {
@@ -9,8 +8,8 @@ export type SelectOption = {
 export type Props = {
   id: string;
   name: string;
-  onChange?: (event: any) => void;
-  onBlur?: (event: any) => void;
+  onChange?: (event: React.FormEvent<HTMLInputElement>) => string;
+  onBlur?: (event: React.FormEvent<HTMLInputElement>) => string;
   label: string;
   errorMessage?: string;
   placeholder: string;
@@ -19,7 +18,7 @@ export type Props = {
   touched?: boolean;
   preValue?: string | number;
   type: string;
-  options?: SelectOption;
+  options?: SelectOption[];
 };
 
 const TextInput: React.FC<Props> = (props) => {

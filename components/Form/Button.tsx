@@ -6,7 +6,7 @@ export type Props = {
   buttonText: string;
   customClass: string;
   isDisabled: boolean;
-  onClick?: (event: React.FormEvent<HTMLButtonElement>) => void;
+  onClick?: (event: React.FormEvent<HTMLButtonElement>) => React.FormEvent<HTMLButtonElement>;
   isLoading: boolean;
 };
 

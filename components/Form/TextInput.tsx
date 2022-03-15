@@ -8,8 +8,8 @@ export type SelectOption = {
 export type Props = {
   id: string;
   name: string;
-  onChange: (event: React.FormEvent<HTMLButtonElement>) => void;
-  onBlur: (event: React.FormEvent<HTMLButtonElement>) => void;
+  onChange?: (event: React.FormEvent<HTMLButtonElement>) => void;
+  onBlur?: (event: React.FormEvent<HTMLButtonElement>) => void;
   label: string;
   errorMessage?: string;
   placeholder: string;

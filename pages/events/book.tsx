@@ -9,7 +9,7 @@ import * as Yup from "yup";
 
 import Button from "../../components/Form/Button";
 import TextInput from "../../components/Form/TextInput";
-import client from "../react-query-client.ts";
+import client from "../react-query-client";
 import { Event } from "./index";
 
 const Book: React.FC = () => {

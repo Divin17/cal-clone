@@ -8,7 +8,7 @@ import Shell from "@components/Shell";
 import Spinner from "../../components/Form/Spinner";
 import Event from "../../components/Layout/Event";
 import Navbar from "../../components/Layout/Navbar";
-import User from "../api/auth/signup.ts";
+import User from "../api/auth/signup";
 
 type Event = {
   name: string;

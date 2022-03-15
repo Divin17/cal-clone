@@ -54,9 +54,7 @@ const EventType: React.FC = () => {
               </div>
             </div>
           </div>
-        ) : (
-          <Spinner />
-        )}
+        ) : null}
         <div className="w-1/2 max-w-lg px-16 py-10 bg-white ">
           <Formik
             initialValues={initialValues}

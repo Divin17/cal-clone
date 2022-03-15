@@ -3,8 +3,9 @@ import type { AppProps } from "next/app";
 import { QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
+import { client } from "@helpers/react-query-client";
+
 import "../styles/globals.css";
-import { client } from "./react-query-client";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (

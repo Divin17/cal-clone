@@ -7,9 +7,10 @@ import React, { useState } from "react";
 import { useMutation } from "react-query";
 import * as Yup from "yup";
 
+import { client } from "@helpers/react-query-client";
+
 import Button from "../../components/Form/Button";
 import TextInput from "../../components/Form/TextInput";
-import { client } from "../react-query-client";
 import { Event } from "./index";
 
 type EventType = {
